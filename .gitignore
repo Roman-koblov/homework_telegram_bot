@@ -150,3 +150,6 @@ static/
 posts/static/
 media/
 
+# logs
+my_logger.log
+program.log
