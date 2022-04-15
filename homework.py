@@ -48,10 +48,7 @@ def send_message(bot, message):
 
 
 def get_api_answer(current_timestamp):
-    """Делает запрос к единственному эндпоинту API-сервиса.
-    В случае успешного запроса должна вернуть ответ API,
-    преобразовав его из формата JSON к типам данных Python.
-    """
+    """Делает запрос к единственному эндпоинту API-сервиса."""
     timestamp = current_timestamp or time.time_ns()
     params = {'from_date': timestamp}
     try:
