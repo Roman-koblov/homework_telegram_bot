@@ -90,7 +90,8 @@ def check_response(response):
 
 def parse_status(homework):
     """Извлекает из информации о конкретной домашней работе
-    статус этой работы."""
+    статус этой работы.
+    """
     if 'homework_name' not in homework:
         raise KeyError('Отсутствует ключ "homework_name" в ответе API')
     if 'status' not in homework:
@@ -104,6 +105,10 @@ def parse_status(homework):
 
 
 def check_tokens():
+    """Проверяет доступность переменных окружения, необходимых для работы.
+    Если отсутствует хотя бы одна переменная окружения — функция
+    должна вернуть False, иначе — True.
+    """
     if all([PRACTICUM_TOKEN, TELEGRAM_TOKEN, TELEGRAM_CHAT_ID]):
         return True
     else:
