@@ -108,8 +108,8 @@ def check_tokens():
 def main():
     """Основная логика работы бота."""
     current_timestamp = int(time.time()) - ONE_DAY
-    STATUS_MESSAGE = ''
-    ERROR_MESSAGE = ''
+    status_message = ''
+    error_message = ''
     if not check_tokens():
         logger.critical('Отсутствуют токены')
         sys.exit(1)
@@ -119,15 +119,15 @@ def main():
             response = get_api_answer(current_timestamp)
             current_timestamp = response.get('current_date')
             message = parse_status(check_response(response))
-            if message != STATUS_MESSAGE:
+            if message != status_message:
                 send_message(bot, message)
-                STATUS_MESSAGE = message
+                status_message = message
         except Exception as error:
             logger.error(error)
             message = f'Сбой в работе программы: {error}'
-            if message != ERROR_MESSAGE:
+            if message != error_message:
                 send_message(bot, message)
-                ERROR_MESSAGE = message
+                error_message = message
         finally:
             time.sleep(RETRY_TIME)
 
