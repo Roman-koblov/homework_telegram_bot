@@ -16,7 +16,6 @@ TELEGRAM_TOKEN = os.getenv('TELEGRAM_TOKEN')
 TELEGRAM_CHAT_ID = os.getenv('TELEGRAM_CHAT_ID')
 RETRY_TIME = 600
 ENDPOINT = 'https://practicum.yandex.ru/api/user_api/homework_statuses/'
-
 HOMEWORK_VERDICTS = {
     'approved': 'Работа проверена: ревьюеру всё понравилось. Ура!',
     'reviewing': 'Работа взята на проверку.',
@@ -60,7 +59,7 @@ def send_message(bot, message):
 
 def get_api_answer(current_timestamp):
     """Делает запрос к единственному эндпоинту API-сервиса."""
-    timestamp = current_timestamp or time.time_ns()
+    timestamp = current_timestamp or int(time.time())
     headers_and_params = {
         'header': {'Authorization': f'OAuth {PRACTICUM_TOKEN}'},
         'param': {'from_date': timestamp}
@@ -92,6 +91,7 @@ def check_response(response):
         homework = (response['homeworks'])[0]
         return homework
     except IndexError:
+        logger.error('Список работ пуст')
         raise IndexError('Список работ пуст')
 
 
@@ -121,7 +121,7 @@ def check_tokens():
 
 def main():
     """Основная логика работы бота."""
-    current_timestamp = time.time_ns()
+    current_timestamp = int(time.time())
     if not check_tokens():
         logger.critical('Отсутствуют токены')
         raise Exception('Отсутствуют токены')
@@ -138,7 +138,6 @@ def main():
             logger.error(error)
             message = f'Сбой в работе программы: {error}'
             send_message(bot, message)
-            time.sleep(RETRY_TIME)
         finally:
             time.sleep(RETRY_TIME)
 
