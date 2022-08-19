@@ -27,7 +27,7 @@
 
 <pre><code>git clone [https://github.com/Roman-koblov/homework_telegram_bot]</code>
 
-<code>cd api_yamdb</code></pre>
+<code>cd homework_telegram_bot</code></pre>
 
 Cоздать и активировать виртуальное окружение:
 
