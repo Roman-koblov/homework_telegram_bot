@@ -56,6 +56,6 @@ Cоздать и активировать виртуальное окружен�
 
 Установить зависимости из файла requirements.txt:
 
-<pre><code>python -m pip install --upgrade pip</code>
+<pre><code>python3 -m pip install --upgrade pip</code>
 
-<code>pip install -r requirements.txt</code></pre>
+<code>pip3 install -r requirements.txt</code></pre>
